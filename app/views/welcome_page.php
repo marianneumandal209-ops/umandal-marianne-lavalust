@@ -760,3 +760,5 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 </body>
 </html>
+
+<!-- Updated landing page test -->
