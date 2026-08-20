@@ -1,4 +1,5 @@
 <?php
+
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 class StudentController extends Controller
@@ -27,10 +28,13 @@ class StudentController extends Controller
         }
 
         $data = $this->studentData();
+
         $data['notice'] = $_SESSION['student_notice'] ?? null;
+
         unset($_SESSION['student_notice']);
 
-        $this->call->view('student/home', $data);
+        // Loads: app/views/Student/Home.php
+        $this->call->view('Student/Home', $data);
     }
 
     public function openProfile()
@@ -53,12 +57,16 @@ class StudentController extends Controller
         }
 
         $data = $this->studentData();
+
         $data['title'] = 'Student Profile';
-        $data['middleware_message'] = $_SESSION['middleware_message'] ?? 'Access verified by StudentMiddleware.';
+
+        $data['middleware_message'] =
+            $_SESSION['middleware_message']
+            ?? 'Access verified by StudentMiddleware.';
+
         unset($_SESSION['middleware_message']);
 
-        // Pass $data array straight to the profile view
-        $this->call->view('student/profile', $data);
+        // Loads: app/views/Student/Profile.php
+        $this->call->view('Student/Profile', $data);
     }
 }
-?>
