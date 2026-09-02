@@ -72,7 +72,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 |
 |   $autoload['libraries'] = array('database', 'email', 'session');
 */
-$autoload['libraries'] = array();
+$autoload['libraries'] = array('database');
 
 /*
 | -------------------------------------------------------------------
@@ -82,7 +82,6 @@ $autoload['libraries'] = array();
 |
 |   $autoload['helpers'] = array('url', 'file');
 */
-// Naka-autoload na dito ang URL helper para sa Part G (site_url)
 $autoload['helpers'] = array('url');
 
 /*

@@ -204,7 +204,6 @@
                 <div class="notice"><?= htmlspecialchars($notice, ENT_QUOTES, 'UTF-8'); ?></div>
             <?php endif; ?>
 
-            <!-- PA-DIRETSO (SINGLE COLUMN) NA INFO CARDS -->
             <div class="info-grid">
                 <div class="info"><span class="label">Student ID</span><span class="value"><?= htmlspecialchars($student_id); ?></span></div>
                 <div class="info"><span class="label">Student Name</span><span class="value"><?= htmlspecialchars($name); ?></span></div>
