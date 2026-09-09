@@ -2,25 +2,18 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Product</title>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
 
         body {
             font-family: Arial, sans-serif;
-            background: #eef5ff;
+            background: #fff5f5; /* Light red/pink background */
             margin: 0;
             padding: 40px;
             color: #1e293b;
@@ -32,15 +25,15 @@
             background: #ffffff;
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.10);
-            border: 1px solid #dbeafe;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.10);
+            border: 1px solid #fee2e2;
         }
 
         h1 {
             margin-top: 0;
             margin-bottom: 25px;
             text-align: center;
-            color: #1e3a8a;
+            color: #991b1b; /* Dark red para sa pamagat */
             font-size: 30px;
             font-weight: 700;
         }
@@ -49,7 +42,7 @@
             display: block;
             margin-bottom: 6px;
             font-weight: bold;
-            color: #1e3a8a;
+            color: #991b1b;
         }
 
         input,
@@ -57,18 +50,24 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 18px;
-            border: 1px solid #bfdbfe;
+            border: 1px solid #fecaca;
             border-radius: 6px;
             font-size: 14px;
             background: #ffffff;
             color: #1e293b;
             outline: none;
+            transition: 0.2s;
         }
 
         input:focus,
         textarea:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.10);
+            border-color: #dc2626;
+            box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.10);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #94a3b8;
         }
 
         textarea {
@@ -89,34 +88,36 @@
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
+            transition: 0.2s;
         }
 
-        .save-btn {
-            background: #2563eb;
+        .update-btn {
+            background: #dc2626; /* Vibrant red */
             color: white;
         }
 
-        .save-btn:hover {
-            background: #1d4ed8;
+        .update-btn:hover {
+            background: #b91c1c; /* Darker red kapag hinohover */
         }
 
         .back-btn {
             background: #ffffff;
-            color: #475569;
+            color: #dc2626;
             text-decoration: none;
             padding: 11px 18px;
             border-radius: 6px;
-            border: 1px solid #cbd5e1;
+            border: 1px solid #fecaca;
             font-weight: 600;
+            display: inline-block;
+            text-align: center;
+            transition: 0.2s;
         }
 
         .back-btn:hover {
-            background: #f1f5f9;
-            border-color: #94a3b8;
+            background: #fee2e2; /* Light red/pink background kapag hinohover */
+            border-color: #f87171;
         }
-
     </style>
-
 </head>
 
 <body>
@@ -125,101 +126,28 @@
 
     <h1>Edit Product</h1>
 
-    <?php if (!empty($product)): ?>
+    <form action="<?= site_url('products/update/' . $product['id']); ?>" method="POST">
 
-        <form
-            action="<?= site_url('products/update/' . $product['id']); ?>"
-            method="POST"
-        >
+        <label>Product Name</label>
+        <input type="text" name="product_name" value="<?= htmlspecialchars($product['product_name']); ?>" placeholder="Enter product name" required>
 
-            <label for="product_name">
-                Product Name
-            </label>
+        <label>Description</label>
+        <textarea name="description" placeholder="Enter product description" required><?= htmlspecialchars($product['description']); ?></textarea>
 
-            <input
-                type="text"
-                id="product_name"
-                name="product_name"
-                value="<?= htmlspecialchars($product['product_name']); ?>"
-                required
-            >
+        <label>Price</label>
+        <input type="number" name="price" step="0.01" min="0" value="<?= htmlspecialchars($product['price']); ?>" placeholder="0.00" required>
 
+        <label>Quantity</label>
+        <input type="number" name="quantity" min="0" value="<?= htmlspecialchars($product['quantity']); ?>" placeholder="Enter quantity" required>
 
-            <label for="description">
-                Description
-            </label>
+        <div class="buttons">
+            <button type="submit" class="update-btn">Update Product</button>
+            <a href="<?= site_url('products'); ?>" class="back-btn">Back</a>
+        </div>
 
-            <textarea
-                id="description"
-                name="description"
-                required
-            ><?= htmlspecialchars($product['description']); ?></textarea>
-
-
-            <label for="price">
-                Price
-            </label>
-
-            <input
-                type="number"
-                id="price"
-                name="price"
-                step="0.01"
-                min="0"
-                value="<?= htmlspecialchars($product['price']); ?>"
-                required
-            >
-
-
-            <label for="quantity">
-                Quantity
-            </label>
-
-            <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="0"
-                value="<?= htmlspecialchars($product['quantity']); ?>"
-                required
-            >
-
-
-            <div class="buttons">
-
-                <button
-                    type="submit"
-                    class="save-btn"
-                >
-                    Update Product
-                </button>
-
-                <a
-                    href="<?= site_url('products'); ?>"
-                    class="back-btn"
-                >
-                    Back
-                </a>
-
-            </div>
-
-        </form>
-
-    <?php else: ?>
-
-        <p>Product not found.</p>
-
-        <a
-            href="<?= site_url('products'); ?>"
-            class="back-btn"
-        >
-            Back to Products
-        </a>
-
-    <?php endif; ?>
+    </form>
 
 </div>
 
 </body>
-
 </html>

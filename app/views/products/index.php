@@ -2,25 +2,17 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Management</title>
-
     <style>
-
         * {
             box-sizing: border-box;
         }
 
         body {
             font-family: Arial, sans-serif;
-            background: #eef5ff;
+            background: #fff5f5; /* Malambot na light red/pink background */
             margin: 0;
             padding: 40px;
             color: #1e293b;
@@ -32,8 +24,8 @@
             background: #ffffff;
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.10);
-            border: 1px solid #dbeafe;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.10);
+            border: 1px solid #fee2e2;
         }
 
         .header {
@@ -45,13 +37,13 @@
 
         h1 {
             margin: 0;
-            color: #1e3a8a;
+            color: #991b1b; /* Dark red para sa pamagat */
             font-size: 30px;
             font-weight: 700;
         }
 
         .add-btn {
-            background: #2563eb;
+            background: #dc2626; /* Vibrant red button */
             color: white;
             padding: 11px 18px;
             text-decoration: none;
@@ -61,7 +53,7 @@
         }
 
         .add-btn:hover {
-            background: #1d4ed8;
+            background: #b91c1c; /* Mas madilim na pulang kulay pagka-hover */
         }
 
         table {
@@ -69,26 +61,26 @@
             border-collapse: separate;
             border-spacing: 0;
             overflow: hidden;
-            border: 1px solid #dbeafe;
+            border: 1px solid #fee2e2;
             border-radius: 8px;
         }
 
         th,
         td {
             padding: 14px 12px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #f1f5f9;
             text-align: left;
         }
 
         th {
-            background: #eff6ff;
-            color: #1e3a8a;
+            background: #fef2f2; /* Light red background para sa table header */
+            color: #991b1b;
             font-weight: 700;
-            border-bottom: 2px solid #bfdbfe;
+            border-bottom: 2px solid #fecaca;
         }
 
         tbody tr:hover {
-            background: #f8fbff;
+            background: #fff8f8; /* Banayad na red tint sa bawat row pagka-hover */
         }
 
         tbody tr:last-child td {
@@ -114,12 +106,12 @@
         }
 
         .edit-btn {
-            background: #2563eb;
+            background: #dc2626; /* Red tone para sa Edit button */
             color: white;
         }
 
         .edit-btn:hover {
-            background: #1d4ed8;
+            background: #b91c1c;
         }
 
         .delete-btn {
@@ -129,8 +121,8 @@
         }
 
         .delete-btn:hover {
-            background: #fee2e2;
-            border-color: #fca5a5;
+            background: #fee2e2; /* Pulang background kapag in-hover ang delete */
+            border-color: #f87171;
         }
 
         .empty {
@@ -138,133 +130,75 @@
             padding: 25px;
             color: #64748b;
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
 <div class="container">
 
-
     <div class="header">
-
         <h1>Product Management</h1>
-
-        <a
-            href="<?= site_url('products/create'); ?>"
-            class="add-btn"
-        >
+        <a href="<?= site_url('products/create'); ?>" class="add-btn">
             + Add Product
         </a>
-
     </div>
 
-
     <table>
-
         <thead>
-
             <tr>
-
                 <th>ID</th>
-
                 <th>Product Name</th>
-
                 <th>Description</th>
-
                 <th>Price</th>
-
                 <th>Quantity</th>
-
                 <th>Actions</th>
-
             </tr>
-
         </thead>
 
-
         <tbody>
-
         <?php if (!empty($products)): ?>
-
             <?php foreach ($products as $product): ?>
-
                 <tr>
-
                     <td>
                         <?= htmlspecialchars($product['id']); ?>
                     </td>
-
                     <td>
                         <?= htmlspecialchars($product['product_name']); ?>
                     </td>
-
                     <td>
                         <?= htmlspecialchars($product['description']); ?>
                     </td>
-
                     <td>
                         ₱<?= number_format($product['price'], 2); ?>
                     </td>
-
                     <td>
                         <?= htmlspecialchars($product['quantity']); ?>
                     </td>
-
                     <td>
-
                         <!-- EDIT -->
-
-                        <a
-                            href="<?= site_url('products/edit/' . $product['id']); ?>"
-                            class="edit-btn"
-                        >
+                        <a href="<?= site_url('products/edit/' . $product['id']); ?>" class="edit-btn">
                             Edit
                         </a>
 
-
                         <!-- DELETE -->
-
-                        <a
-                            href="<?= site_url('products/delete/' . $product['id']); ?>"
-                            class="delete-btn"
-                            onclick="return confirm('Are you sure you want to delete this product?');"
-                        >
+                        <a href="<?= site_url('products/delete/' . $product['id']); ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this product?');">
                             Delete
                         </a>
-
                     </td>
-
                 </tr>
-
             <?php endforeach; ?>
-
         <?php else: ?>
-
             <tr>
-
-                <td
-                    colspan="6"
-                    class="empty"
-                >
+                <td colspan="6" class="empty">
                     No products found.
                 </td>
-
             </tr>
-
         <?php endif; ?>
-
         </tbody>
-
     </table>
 
-
 </div>
-
 
 </body>
 
