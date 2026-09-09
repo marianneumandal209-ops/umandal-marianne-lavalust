@@ -74,12 +74,12 @@ $config['environment'] = getenv('APP_ENV') ?: 'development';
 | URL to your LavaLust root. Typically this will be your base URL,
 | WITH a trailing slash:
 |
-|	http://example.com/
+|   http://example.com/
 |
 | WARNING: You MUST set this value!
 |
 */
-$config['base_url'] 				= '';
+$config['base_url']                 = 'http://localhost/LavaLust/';
 
 /*
 |--------------------------------------------------------------------------
@@ -99,7 +99,7 @@ $config['proxy_enabled']           = FALSE;
 | variable to blank.
 |
 */
-$config['index_page']               = 'index.php';
+$config['index_page']              = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -108,14 +108,14 @@ $config['index_page']               = 'index.php';
 |
 | You can enable error logging by setting a threshold over zero.
 |
-|	0 = Disables logging
-|	1 = Exception and Error Messages
+|   0 = Disables logging
+|   1 = Exception and Error Messages
 |   2 = Debug
 |   3 = All
 |
 */
-$config['log_threshold']            = 0;
-$config['log_dir']                  = 'runtime/logs/';
+$config['log_threshold']           = 0;
+$config['log_dir']                 = 'runtime/logs/';
 
 /*
 |--------------------------------------------------------------------------
@@ -125,19 +125,19 @@ $config['log_dir']                  = 'runtime/logs/';
 | Enabling this setting will tell LavaLust to look for a Composer
 | package auto-loader script in vendor/autoload.php.
 |
-|	$config['composer_autoload'] = TRUE;
+|   $config['composer_autoload'] = TRUE;
 |
 | Or if you have your vendor/ directory located somewhere else, you
 | can opt to set a specific path as well:
 |
-|	$config['composer_autoload'] = '/path/to/vendor/autoload.php';
+|   $config['composer_autoload'] = '/path/to/vendor/autoload.php';
 |
 | For more information about Composer, please visit http://getcomposer.org/
 |
 | Note: This will NOT disable or override the LavaLust-specific
-|	autoloading (app/config/autoload.php)
+|   autoloading (app/config/autoload.php)
 */
-$config['composer_autoload']        = FALSE;
+$config['composer_autoload']       = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -159,7 +159,7 @@ $config['composer_autoload']        = FALSE;
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
 */
-$config['permitted_uri_chars']		= 'a-z 0-9~%.:_\-';
+$config['permitted_uri_chars']     = 'a-z 0-9~%.:_\-';
 
 /*
 |--------------------------------------------------------------------------
@@ -169,7 +169,7 @@ $config['permitted_uri_chars']		= 'a-z 0-9~%.:_\-';
 | This config will be use html_escape function
 |
 */
-$config['charset']					= 'UTF-8';
+$config['charset']                 = 'UTF-8';
 
 /*
 |--------------------------------------------------------------------------
@@ -179,7 +179,7 @@ $config['charset']					= 'UTF-8';
 | app/views/errors/ directory.  Use a full server path with trailing slash.
 |
 */
-$config['error_view_path']         	= '';
+$config['error_view_path']         = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -188,12 +188,12 @@ $config['error_view_path']         	= '';
 |
 | $config['404_override'] is use if you want to add custom 404 error page.
 |
-|	example: $confg['404_override'] = 'default/404'
+|   example: $confg['404_override'] = 'default/404'
 |
-|	if you have 'default folder' and '404.php file' inside error folder in view
+|   if you have 'default folder' and '404.php file' inside error folder in view
 |
 */
-$config['404_override']       	    = '';
+$config['404_override']            = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -205,7 +205,7 @@ $config['404_override']       	    = '';
 | than en-US.
 |
 */
-$config['language'] 				= 'en-US';
+$config['language']                = 'en-US';
 
 /*
 |--------------------------------------------------------------------------
@@ -216,7 +216,7 @@ $config['language'] 				= 'en-US';
 | For example, if you have a class named MY_Controller, you would set this to 'MY_'.
 |
 */
-$config['subclass_prefix']          = 'MY_';
+$config['subclass_prefix']         = 'MY_';
 
 /*
 |--------------------------------------------------------------------------
@@ -298,7 +298,7 @@ $config['cache_default_expires']   = 0;
 |
 |
 */
-$config['encryption_key']           = getenv('APP_KEY') ?: '';
+$config['encryption_key']          = getenv('APP_KEY') ?: '';
 
 /*
 |--------------------------------------------------------------------------
@@ -312,8 +312,8 @@ $config['encryption_key']           = getenv('APP_KEY') ?: '';
 |   $config['soft_delete_column'] = 'deleted_at;
 |
 */
-$config['soft_delete']              = FALSE;
-$config['soft_delete_column']       = 'deleted_at';
+$config['soft_delete']             = FALSE;
+$config['soft_delete_column']      = 'deleted_at';
 
 /*
 |--------------------------------------------------------------------------
@@ -325,9 +325,9 @@ $config['soft_delete_column']       = 'deleted_at';
 |   $config['updated_at_column'] = 'updated_at';
 |
 */
-$config['timestamps']               = FALSE;
-$config['created_at_column']        = 'created_at';
-$config['updated_at_column']        = 'updated_at';
+$config['timestamps']              = FALSE;
+$config['created_at_column']       = 'created_at';
+$config['updated_at_column']       = 'updated_at';
 
 /*
 |--------------------------------------------------------------------------
