@@ -10,6 +10,9 @@ RUN a2enmod rewrite
 # Allow .htaccess overrides
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
 
+# Change Apache DocumentRoot to point to public folder
+RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+
 # Copy app files
 COPY . /var/www/html/
 
