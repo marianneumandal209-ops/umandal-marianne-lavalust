@@ -107,7 +107,7 @@
         <div class="error"><?= $error; ?></div>
     <?php endif; ?>
 
-    <form action="<?= base_url('auth/authenticate'); ?>" method="POST">
+    <form action="https://umandal-marianne.onrender.com/auth/authenticate" method="POST">
         <div class="form-group">
             <label>Username</label>
             <input type="text" name="username" placeholder="Enter username" required>
