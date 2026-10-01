@@ -23,7 +23,8 @@ class AuthController extends Controller
 
         $user = $this->UserModel->get_user($username);
 
-        if ($user && password_verify($password, $user['password'])) {
+        // Pinalitan ko ang password_verify ng direct comparison dahil plain text ang password sa DB
+        if ($user && $user['password'] === $password) {
             // I-save sa session kapag successful ang login
             $this->session->set_userdata([
                 'user_id' => $user['id'],

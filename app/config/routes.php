@@ -59,3 +59,16 @@ $router->get('/products/delete/{id}', 'ProductController::delete')
 $router->get('/auth/login', 'AuthController::login');
 $router->post('/auth/authenticate', 'AuthController::authenticate');
 $router->get('/auth/logout', 'AuthController::logout');
+// Migration Routes
+$router->get('create-migration/{migration_class}', 'MigrationController::create_migration');
+$router->get('migrate', 'MigrationController::migrate');
+$router->get('rollback', 'MigrationController::rollback');
+$router->get('rollback-all', 'MigrationController::rollback_all');
+$router->get('refresh', 'MigrationController::refresh');
+$router->get('status', 'MigrationController::status');
+// API Routes
+$router->post('/api/login', 'ApiController::login');
+$router->get('/api/products', 'ApiController::products');
+$router->post('/api/products', 'ApiController::create_product');
+$router->put('/api/products/{id}', 'ApiController::update_product');
+$router->delete('/api/products/{id}', 'ApiController::delete_product');
