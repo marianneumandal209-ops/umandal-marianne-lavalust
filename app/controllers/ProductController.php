@@ -32,13 +32,14 @@ class ProductController extends Controller
         exit();
     }
 
-    // POST: Store a new product from JSON input (binago mula 'create' patungong 'store')
+    // POST: Store a new product from JSON input
     public function store()
     {
         $input = json_decode(trim(file_get_contents('php://input')), true);
 
         $data = [
             'product_name' => $input['product_name'] ?? $input['name'] ?? $this->io->post('product_name'),
+            'description'  => $input['description'] ?? $this->io->post('description'), // 👈 Idinagdag para sa description
             'price'        => $input['price'] ?? $this->io->post('price'),
             'quantity'     => $input['quantity'] ?? $this->io->post('quantity')
         ];
@@ -57,6 +58,7 @@ class ProductController extends Controller
 
         $data = [
             'product_name' => $input['product_name'] ?? $input['name'] ?? $this->io->post('product_name'),
+            'description'  => $input['description'] ?? $this->io->post('description'), // 👈 Idinagdag para sa description
             'price'        => $input['price'] ?? $this->io->post('price'),
             'quantity'     => $input['quantity'] ?? $this->io->post('quantity')
         ];
