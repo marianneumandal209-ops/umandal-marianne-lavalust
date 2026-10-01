@@ -38,9 +38,9 @@ class ProductController extends Controller
         $input = json_decode(trim(file_get_contents('php://input')), true);
 
         $data = [
-            'name'     => $input['name'] ?? $this->io->post('name'),
-            'price'    => $input['price'] ?? $this->io->post('price'),
-            'quantity' => $input['quantity'] ?? $this->io->post('quantity')
+            'product_name' => $input['product_name'] ?? $input['name'] ?? $this->io->post('product_name'),
+            'price'        => $input['price'] ?? $this->io->post('price'),
+            'quantity'     => $input['quantity'] ?? $this->io->post('quantity')
         ];
 
         $this->ProductModel->insert($data);
@@ -56,9 +56,9 @@ class ProductController extends Controller
         $input = json_decode(trim(file_get_contents('php://input')), true);
 
         $data = [
-            'name'     => $input['name'] ?? $this->io->post('name'),
-            'price'    => $input['price'] ?? $this->io->post('price'),
-            'quantity' => $input['quantity'] ?? $this->io->post('quantity')
+            'product_name' => $input['product_name'] ?? $input['name'] ?? $this->io->post('product_name'),
+            'price'        => $input['price'] ?? $this->io->post('price'),
+            'quantity'     => $input['quantity'] ?? $this->io->post('quantity')
         ];
 
         $this->ProductModel->update($id, $data);
