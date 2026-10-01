@@ -1,5 +1,16 @@
 <?php
 define('PREVENT_DIRECT_ACCESS', TRUE);
+
+// Global CORS Headers para sa Render API at React Frontend
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
 /**
  * ------------------------------------------------------------------
  * LavaLust - an opensource lightweight PHP MVC Framework
@@ -45,7 +56,7 @@ define('PREVENT_DIRECT_ACCESS', TRUE);
  * 
  * NO TRAILING SLASH!
  */
-	$system_path 			= 'scheme';
+    $system_path            = 'scheme';
 
 /*
  *---------------------------------------------------------------
@@ -57,7 +68,7 @@ define('PREVENT_DIRECT_ACCESS', TRUE);
  *
  * NO TRAILING SLASH!
  */
-	$application_folder 	= 'app';
+    $application_folder     = 'app';
 
 /*
  *---------------------------------------------------------------
@@ -66,7 +77,7 @@ define('PREVENT_DIRECT_ACCESS', TRUE);
  * This let you set up your public folder where css, js and other public,
  * files will be visible
  */
-	$public_folder			= 'public';
+    $public_folder          = 'public';
 
 /*
  * ------------------------------------------------------
