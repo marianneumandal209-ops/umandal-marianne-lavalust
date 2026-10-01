@@ -32,8 +32,8 @@ class ProductController extends Controller
         exit();
     }
 
-    // POST: Store a new product from JSON input
-    public function create()
+    // POST: Store a new product from JSON input (binago mula 'create' patungong 'store')
+    public function store()
     {
         $input = json_decode(trim(file_get_contents('php://input')), true);
 
