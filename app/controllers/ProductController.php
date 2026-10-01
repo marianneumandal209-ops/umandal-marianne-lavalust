@@ -7,75 +7,74 @@ class ProductController extends Controller
     {
         parent::__construct();
 
-        // 1. I-load muna ang session library at iba pang kailangan
+        // CORS Headers para sa Product API endpoints
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            http_response_code(200);
+            exit();
+        }
+
         $this->call->library('session');
         $this->call->model('ProductModel');
         $this->call->helper('url');
-
-        // 2. Sunod na i-check kung naka-login ang user bago payagang makapasok
-        if (!$this->session->userdata('logged_in')) {
-            redirect('auth/login');
-        }
     }
 
+    // GET: Display all products as JSON
     public function index()
     {
-        $data['products'] = $this->ProductModel->get_all();
-
-        $this->call->view('products/index', $data);
+        $products = $this->ProductModel->get_all();
+        
+        header('Content-Type: application/json');
+        echo json_encode($products);
+        exit();
     }
 
+    // POST: Store a new product from JSON input
     public function create()
     {
-        $this->call->view('products/create');
-    }
+        $input = json_decode(trim(file_get_contents('php://input')), true);
 
-    public function store()
-    {
         $data = [
-            'product_name' => $this->io->post('product_name'),
-            'description'  => $this->io->post('description'),
-            'price'        => $this->io->post('price'),
-            'quantity'     => $this->io->post('quantity')
+            'name'     => $input['name'] ?? $this->io->post('name'),
+            'price'    => $input['price'] ?? $this->io->post('price'),
+            'quantity' => $input['quantity'] ?? $this->io->post('quantity')
         ];
 
         $this->ProductModel->insert($data);
 
-        redirect('products');
+        header('Content-Type: application/json');
+        echo json_encode(['status' => true, 'message' => 'Product created successfully']);
+        exit();
     }
 
-    public function edit($id)
-    {
-        $product = $this->ProductModel->get_by_id($id);
-
-        if (!$product) {
-            redirect('products');
-            return;
-        }
-
-        $data['product'] = $product;
-
-        $this->call->view('products/edit', $data);
-    }
-
+    // PUT/PATCH: Update product by ID from JSON input
     public function update($id)
     {
+        $input = json_decode(trim(file_get_contents('php://input')), true);
+
         $data = [
-            'product_name' => $this->io->post('product_name'),
-            'description'  => $this->io->post('description'),
-            'price'        => $this->io->post('price'),
-            'quantity'     => $this->io->post('quantity')
+            'name'     => $input['name'] ?? $this->io->post('name'),
+            'price'    => $input['price'] ?? $this->io->post('price'),
+            'quantity' => $input['quantity'] ?? $this->io->post('quantity')
         ];
 
         $this->ProductModel->update($id, $data);
 
-        redirect('products');
+        header('Content-Type: application/json');
+        echo json_encode(['status' => true, 'message' => 'Product updated successfully']);
+        exit();
     }
 
+    // DELETE: Delete product by ID
     public function delete($id)
     {
         $this->ProductModel->delete($id);
 
-        redirect('products');
+        header('Content-Type: application/json');
+        echo json_encode(['status' => true, 'message' => 'Product deleted successfully']);
+        exit();
     }
 }

@@ -6,7 +6,18 @@ class AuthController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->call->library('session'); // Idinagdag ito para ma-load ang session
+        
+        // CORS Headers para payagan ang React frontend
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            http_response_code(200);
+            exit();
+        }
+
+        $this->call->library('session');
         $this->call->model('UserModel');
         $this->call->helper('url');
     }
@@ -18,30 +29,54 @@ class AuthController extends Controller
 
     public function authenticate()
     {
-        $username = $this->io->post('username');
-        $password = $this->io->post('password');
+        $input = json_decode(trim(file_get_contents('php://input')), true);
+        
+        $username = $input['username'] ?? $this->io->post('username');
+        $password = $input['password'] ?? $this->io->post('password');
 
         $user = $this->UserModel->get_user($username);
 
-        // Pinalitan ko ang password_verify ng direct comparison dahil plain text ang password sa DB
         if ($user && $user['password'] === $password) {
-            // I-save sa session kapag successful ang login
+            $token = bin2hex(random_bytes(32));
+
             $this->session->set_userdata([
                 'user_id' => $user['id'],
                 'username' => $user['username'],
-                'logged_in' => TRUE
+                'logged_in' => TRUE,
+                'token' => $token
             ]);
 
-            redirect('products');
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true,
+                'message' => 'Login successful',
+                'token' => $token,
+                'user' => [
+                    'id' => $user['id'],
+                    'username' => $user['username']
+                ]
+            ]);
+            exit();
         } else {
-            $data['error'] = 'Invalid username or password';
-            $this->call->view('auth/login', $data);
+            header('HTTP/1.1 401 Unauthorized');
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false,
+                'message' => 'Invalid username or password'
+            ]);
+            exit();
         }
     }
 
     public function logout()
     {
         $this->session->sess_destroy();
-        redirect('auth/login');
+        
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => true,
+            'message' => 'Logged out successfully'
+        ]);
+        exit();
     }
 }
