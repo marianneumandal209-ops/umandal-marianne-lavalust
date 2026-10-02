@@ -44,6 +44,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 */
 /** @var object $router **/
 
+// Root / Home Route (Idinagdag para lumabas ang Welcome page imbes na 404)
+$router->get('/', 'Welcome::index');
 
 $router->get('/products', 'ProductController::index');
 $router->get('/products/create', 'ProductController::create');
@@ -59,6 +61,7 @@ $router->get('/products/delete/{id}', 'ProductController::delete')
 $router->get('/auth/login', 'AuthController::login');
 $router->post('/auth/authenticate', 'AuthController::authenticate');
 $router->get('/auth/logout', 'AuthController::logout');
+
 // Migration Routes
 $router->get('create-migration/{migration_class}', 'MigrationController::create_migration');
 $router->get('migrate', 'MigrationController::migrate');
@@ -66,8 +69,8 @@ $router->get('rollback', 'MigrationController::rollback');
 $router->get('rollback-all', 'MigrationController::rollback_all');
 $router->get('refresh', 'MigrationController::refresh');
 $router->get('status', 'MigrationController::status');
+
 // API Routes
-$router->post('/api/login', 'ApiController::login');
 $router->get('/api/products', 'ApiController::products');
 $router->post('/api/products', 'ApiController::create_product');
 $router->put('/api/products/{id}', 'ApiController::update_product');
