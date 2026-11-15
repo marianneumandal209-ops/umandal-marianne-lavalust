@@ -423,6 +423,7 @@ $config['security_headers'] = [
         'allowed_origins' => [
             'http://localhost:5173',
             'https://mindoropay-frontend-6eym4ly4r-marianne7.vercel.app',
+            'https://mindoropay-frontend.vercel.app',
         ],
         'credentials'     => true,
         'methods'         => 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
