@@ -14,10 +14,12 @@ class Api extends Controller {
         }
 
         if (session_status() !== PHP_SESSION_ACTIVE) {
+            $is_https = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
+                || strtolower($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https';
             session_set_cookie_params([
                 'httponly' => true,
-                'secure' => !empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off',
-                'samesite' => 'Lax',
+                'secure' => $is_https,
+                'samesite' => $is_https ? 'None' : 'Lax',
                 'path' => '/'
             ]);
             session_start();

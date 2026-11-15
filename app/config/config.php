@@ -420,7 +420,10 @@ $config['security_headers'] = [
     // ── API ──
     'api_max_body' => 1048576,
     'cors' => [
-        'allowed_origins' => ['http://localhost:5173'],
+        'allowed_origins' => [
+            'http://localhost:5173',
+            'https://mindoropay-frontend-6eym4ly4r-marianne7.vercel.app',
+        ],
         'credentials'     => true,
         'methods'         => 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
         'headers'         => 'Authorization, Content-Type, X-Requested-With',
